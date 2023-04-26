@@ -63,111 +63,115 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children: [
-          isLoading
-              ? const Center()
-              : GoogleMap(
-                  mapType: MapType.normal,
-                  myLocationButtonEnabled: false,
-                  initialCameraPosition: _kGooglePlex,
-                  markers: mapModel.markers,
-                  polylines: mapModel.polylines,
-                  onMapCreated: (GoogleMapController controller) {
-                    mapModel.controller.complete(controller);
-                    
-                  },
-                ),
-          Positioned(
-              top: 10,
-              left: 0,
-              right: 0,
-              child: AppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                leadingWidth: size.width * 0.15 + 10,
-                leading: Row(
-                  children: [
-                    const SizedBox(
-                      width: 10,
+    body: SingleChildScrollView( // add this widget to fix keyboard overflow
+        child: SizedBox(
+          height: size.height,
+          child: Stack(
+            children: [
+              isLoading
+                  ? const Center()
+                  : GoogleMap(
+                      mapType: MapType.normal,
+                      myLocationButtonEnabled: false,
+                      initialCameraPosition: _kGooglePlex,
+                      markers: mapModel.markers,
+                      polylines: mapModel.polylines,
+                      onMapCreated: (GoogleMapController controller) {
+                        mapModel.controller.complete(controller);
+                      },
                     ),
-                    Container(
-                      width: size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Row(
-                        children: const [
-                          Expanded(
-                              child: Center(
-                            child: Icon(
-                              Icons.sort,
-                              color: Colors.black,
-                              size: 35,
-                            ),
-                          )),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                actions: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    width: size.width * 0.3,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Row(
+              Positioned(
+                  top: 10,
+                  left: 0,
+                  right: 0,
+                  child: AppBar(
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
+                    leadingWidth: size.width * 0.15 + 10,
+                    leading: Row(
                       children: [
-                        const Expanded(
-                            child: Center(
-                          child: Icon(
-                            CupertinoIcons.add_circled,
-                            color: Colors.black,
-                            size: 35,
-                          ),
-                        )),
-                        const VerticalDivider(
-                          color: Colors.black,
-                          endIndent: 5,
-                          indent: 5,
+                        const SizedBox(
+                          width: 10,
                         ),
-                        Expanded(
-                            child: InkWell(
-                          onTap: () {
-                            // print(_kGooglePlex);
-                            // mapModel.addMarker(LatLng(
-                            //     _kGooglePlex.target.latitude,
-                            //     _kGooglePlex.target.longitude) , false);
-                          },
-                          child: const Center(
-                            child: Icon(
-                              CupertinoIcons.bell,
-                              color: Colors.black,
-                              size: 35,
-                            ),
+                        Container(
+                          width: size.width * 0.15,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                        )),
+                          child: Row(
+                            children: const [
+                              Expanded(
+                                  child: Center(
+                                child: Icon(
+                                  Icons.sort,
+                                  color: Colors.black,
+                                  size: 35,
+                                ),
+                              )),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                  )
-                ],
-              )),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: SafeArea(
-              child: SwitchSearchWidgets(
-                mapModel: mapModel,
+                    actions: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        width: size.width * 0.3,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Row(
+                          children: [
+                            const Expanded(
+                                child: Center(
+                              child: Icon(
+                                CupertinoIcons.add_circled,
+                                color: Colors.black,
+                                size: 35,
+                              ),
+                            )),
+                            const VerticalDivider(
+                              color: Colors.black,
+                              endIndent: 5,
+                              indent: 5,
+                            ),
+                            Expanded(
+                                child: InkWell(
+                              onTap: () {
+                                // print(_kGooglePlex);
+                                // mapModel.addMarker(LatLng(
+                                //     _kGooglePlex.target.latitude,
+                                //     _kGooglePlex.target.longitude) , false);
+                              },
+                              child: const Center(
+                                child: Icon(
+                                  CupertinoIcons.bell,
+                                  color: Colors.black,
+                                  size: 35,
+                                ),
+                              ),
+                            )),
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: SafeArea(
+                  child: SwitchSearchWidgets(
+                    mapModel: mapModel,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -201,5 +205,4 @@ class MapSampleState extends State<MapSample> {
     isLoading = false;
     setState(() {});
   }
-   
 }
