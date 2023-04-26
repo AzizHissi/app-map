@@ -63,9 +63,9 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-    body: SingleChildScrollView( // add this widget to fix keyboard overflow
-        child: SizedBox(
-          height: size.height,
+    body: SingleChildScrollView( // add this 2 widgets to fix keyboard overflow
+        child: SizedBox(         //
+          height: size.height,  // 
           child: Stack(
             children: [
               isLoading
