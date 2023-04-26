@@ -1,5 +1,1 @@
-
-
-
-
-String apiKey = 'AIzaSyCsFcywrZ3wc4ugxHOHbAN3yfGFwP3etUI';
+String apiKey = 'your_api_key';
