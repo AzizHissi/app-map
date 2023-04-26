@@ -1,1 +1,1 @@
-String apiKey = 'your_api_key';
+String apiKey = 'your_google_api_key';
